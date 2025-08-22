@@ -6,7 +6,7 @@
 ---
 
 ## 1. Trang Chủ (Homepage)
-![Trang Chủ](./assets/home.png)  
+![Trang Chủ](./express-sequelize-crud/assets/home.png)  
 * **Tiêu đề**: "Quản lý Users của 2Thuancr"  
 * **Mô tả**: Hỗ trợ tạo, xem, sửa, xóa người dùng chỉ với 1 click.  
 * **Nút hành động**:  
@@ -21,7 +21,7 @@
 ---
 
 ## 2. Danh Sách Người Dùng (Users List)
-![Danh Sách Người Dùng](./assets/userslist.png)  
+![Danh Sách](./express-sequelize-crud/assets/userslist.png)  
 * **Giao diện**: Bảng hiển thị danh sách người dùng với các cột:  
   - ID, First Name, Last Name, Email, Address, Gender  
   - Nút hành động: `Edit` (Sửa) và `Delete` (Xóa)  
@@ -33,7 +33,7 @@
 ---
 
 ## 3. Form Tạo Người Dùng Mới (Create User Form)
-![Form Tạo Người Dùng](./assets/create.png)  
+![Form Tạo](./express-sequelize-crud/assets/create.png)  
 * **Các trường nhập liệu**:  
   - First Name, Last Name, Email, Address  
   - Dropdown chọn Gender (Male/Female/Other)  
