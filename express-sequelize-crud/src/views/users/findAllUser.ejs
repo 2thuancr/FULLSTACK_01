@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>All Users</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: radial-gradient(circle at 20% 30%, #1e3a8a, transparent 60%),
+          radial-gradient(circle at 80% 70%, #22d3ee, transparent 60%),
+          linear-gradient(135deg, #0f172a, #1e293b);
+        color: #f8fafc;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+      h1 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 800;
+        margin-bottom: 24px;
+        background: linear-gradient(90deg, #60a5fa, #22d3ee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .actions-top {
+        text-align: center;
+        margin-bottom: 28px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .actions-top a {
+        display: inline-block;
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #0f172a;
+        background: linear-gradient(135deg, #60a5fa, #22d3ee);
+        box-shadow: 0 8px 22px rgba(34, 211, 238, 0.35);
+        transition: transform 0.15s, box-shadow 0.25s;
+      }
+      .actions-top a:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(96, 165, 250, 0.45);
+      }
+      /* riêng cho nút back */
+      .actions-top .back {
+        background: rgba(255, 255, 255, 0.15);
+        color: #f1f5f9;
+        box-shadow: none;
+      }
+      .actions-top .back:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+      }
+      table {
+        width: 95%;
+        max-width: 1100px;
+        margin: 0 auto;
+        border-collapse: collapse;
+        border-radius: 16px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(12px) saturate(160%);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+      }
+      thead {
+        background: rgba(255, 255, 255, 0.15);
+      }
+      th,
+      td {
+        padding: 14px 18px;
+        text-align: left;
+        font-size: 15px;
+      }
+      th {
+        font-weight: 700;
+        color: #e2e8f0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      tbody tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        transition: background 0.2s;
+      }
+      tbody tr:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .action-links a {
+        display: inline-block;
+        margin: 0 4px;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.15s;
+      }
+      .edit {
+        background: rgba(96, 165, 250, 0.2);
+        color: #3b82f6;
+      }
+      .edit:hover {
+        background: rgba(96, 165, 250, 0.35);
+        transform: translateY(-2px);
+      }
+      .delete {
+        background: rgba(239, 68, 68, 0.2);
+        color: #f87171;
+      }
+      .delete:hover {
+        background: rgba(239, 68, 68, 0.35);
+        transform: translateY(-2px);
+      }
+      .no-data {
+        text-align: center;
+        padding: 24px;
+        color: #94a3b8;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Users List</h1>
+
+    <div class="actions-top">
+      <a href="/" class="back">⬅️ Back to Home</a>
+      <a href="/crud">➕ Create New User</a>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Gender</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (dataTable && dataTable.length > 0) { %>
+          <% dataTable.forEach(user => { %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.firstName %></td>
+              <td><%= user.lastName %></td>
+              <td><%= user.email %></td>
+              <td><%= user.address %></td>
+              <td><%= user.gender === 1 ? "Male" : "Female" %></td>
+              <td class="action-links">
+                <a href="/edit-crud?id=<%= user.id %>" class="edit">✏️ Edit</a>
+                <a href="/delete-crud?id=<%= user.id %>" class="delete">🗑️ Delete</a>
+              </td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="7" class="no-data">No users found</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </body>
+</html>

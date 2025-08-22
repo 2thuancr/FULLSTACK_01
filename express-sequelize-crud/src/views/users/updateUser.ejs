@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit User</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at 20% 30%, #1e3a8a, transparent 60%),
+                  radial-gradient(circle at 80% 70%, #22d3ee, transparent 60%),
+                  linear-gradient(135deg, #0f172a, #1e293b);
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .card {
+      width: min(600px, 92vw);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(16px) saturate(160%);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.4);
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      background: linear-gradient(90deg,#60a5fa,#22d3ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,0.08);
+      color: #f8fafc;
+      font-size: 15px;
+      outline: none;
+      transition: border .2s, background .2s;
+    }
+    input:focus, select:focus {
+      border-color: #38bdf8;
+      background: rgba(255,255,255,0.15);
+    }
+    button {
+      margin-top: 22px;
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      color: #0f172a;
+      background: linear-gradient(135deg,#60a5fa,#22d3ee);
+      box-shadow: 0 8px 22px rgba(34,211,238,.35);
+      transition: transform .15s, box-shadow .25s;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(96,165,250,.45);
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 16px;
+      text-align: center;
+      width: 100%;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .back-link:hover { color: #e2e8f0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Edit User</h1>
+    <form action="/put-crud" method="POST">
+      <input type="hidden" name="id" value="<%= user.id %>" />
+
+      <label>First Name</label>
+      <input type="text" name="firstName" value="<%= user.firstName %>" required />
+
+      <label>Last Name</label>
+      <input type="text" name="lastName" value="<%= user.lastName %>" required />
+
+      <label>Email</label>
+      <input type="email" name="email" value="<%= user.email %>" required />
+
+      <label>Address</label>
+      <input type="text" name="address" value="<%= user.address %>" />
+
+      <label>Gender</label>
+      <select name="gender">
+        <option value="1" <%= user.gender === 1 ? "selected" : "" %>>Male</option>
+        <option value="0" <%= user.gender === 0 ? "selected" : "" %>>Female</option>
+      </select>
+
+      <button type="submit">💾 Update User</button>
+    </form>
+    <a href="/get-crud" class="back-link">← Back to Users</a>
+  </div>
+</body>
+</html>

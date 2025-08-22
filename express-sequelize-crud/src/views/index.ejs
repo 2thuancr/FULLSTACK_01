@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= title || "Home Page" %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Google Font (nhẹ, hiện đại) -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg1: #0f172a; /* slate-900 */
+        --bg2: #0b1022; /* deep navy */
+        --glass: #ffffff1a; /* glass overlay */
+        --border: #ffffff30;
+        --txt: #e5e7eb; /* text */
+        --muted: #94a3b8; /* muted text */
+        --brand: #60a5fa; /* primary */
+        --brand-2: #22d3ee; /* accent */
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        color: var(--txt);
+        background: radial-gradient(
+            1200px 800px at 15% 10%,
+            #1e293b 0%,
+            transparent 60%
+          ),
+          radial-gradient(1000px 700px at 85% 80%, #0ea5e9 0%, transparent 55%),
+          linear-gradient(120deg, var(--bg1), var(--bg2));
+        overflow: hidden;
+      }
+      /* Animated aurora backdrop */
+      .aurora {
+        position: fixed;
+        inset: -20vmax;
+        background: conic-gradient(
+          from 0deg at 50% 50%,
+          #60a5fa44,
+          #22d3ee33,
+          #a78bfa33,
+          #60a5fa44
+        );
+        filter: blur(80px) saturate(140%);
+        animation: spin 22s linear infinite;
+        z-index: 0;
+        opacity: 0.6;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        color: var(--txt);
+        background: radial-gradient(
+            1200px 800px at 15% 10%,
+            #1e293b 0%,
+            transparent 60%
+          ),
+          radial-gradient(1000px 700px at 85% 80%, #0ea5e9 0%, transparent 55%),
+          linear-gradient(120deg, var(--bg1), var(--bg2));
+        /* overflow: hidden;  🚫 xoá dòng này */
+        min-height: 100vh; /* để đảm bảo trang luôn tối thiểu full height */
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        height: 100dvh;
+        padding: 24px;
+      }
+      .card {
+        width: min(980px, 92vw);
+        backdrop-filter: blur(14px) saturate(140%);
+        background: linear-gradient(180deg, #ffffff14, #ffffff08);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        padding: clamp(28px, 6vw, 54px);
+        position: relative;
+        overflow: hidden;
+      }
+      /* subtle rim light */
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        background: linear-gradient(90deg, transparent, #ffffff22, transparent);
+        pointer-events: none;
+        mask: linear-gradient(#000, transparent 40%);
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: #ffffff14;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 8px 12px;
+      }
+      .title {
+        margin: 18px 0 10px;
+        font-size: clamp(36px, 6vw, 64px);
+        line-height: 1.04;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-shadow: 0 4px 30px #0005;
+      }
+      .gradient-text {
+        background: linear-gradient(90deg, var(--brand), var(--brand-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .desc {
+        color: var(--muted);
+        font-size: clamp(14px, 2.2vw, 18px);
+        line-height: 1.7;
+        max-width: 70ch;
+        margin: 12px 0 26px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 8px;
+      }
+      .btn {
+        --px: 18px;
+        --py: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: var(--py) clamp(16px, 3vw, var(--px));
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: #0b122066;
+        color: var(--txt);
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        transition: transform 0.15s ease, box-shadow 0.2s ease,
+          background 0.2s ease, border-color 0.2s ease;
+        backdrop-filter: blur(4px);
+        will-change: transform;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 26px #0005;
+        border-color: #ffffff55;
+      }
+      .btn:active {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        border: none;
+        color: #0b1220;
+        box-shadow: 0 10px 30px rgba(96, 165, 250, 0.35);
+      }
+      .btn-primary:hover {
+        box-shadow: 0 16px 38px rgba(34, 211, 238, 0.4);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: clamp(18px, 3vw, 28px);
+      }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 24px;
+      }
+      .chip {
+        border: 1px solid var(--border);
+        background: #0b122066;
+        border-radius: 12px;
+        padding: 12px 14px;
+        color: var(--muted);
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: radial-gradient(circle at 30% 30%, #fff, #fff0);
+        box-shadow: 0 0 8px #fff8, 0 0 28px var(--brand);
+      }
+      @media (max-width: 860px) {
+        .features {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* keyboard hint */
+      .kbd {
+        border: 1px solid var(--border);
+        background: #0b122080;
+        padding: 2px 8px;
+        border-radius: 8px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      /* footer mini */
+      .foot {
+        margin-top: 26px;
+        font-size: 12px;
+        color: #9aa7b8;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        opacity: 0.9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true"></div>
+
+    <main class="container">
+      <section class="card">
+        <div class="grid">
+          <span class="badge">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 7h16M4 12h16M4 17h16"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+            Express · Sequelize · EJS
+          </span>
+
+          <h1 class="title">
+            Quản lý <span class="gradient-text">Users</span> của 2Thuancr
+          </h1>
+
+          <p class="desc">
+            Cùng Vi Quốc Thuận toạ dự án mẫu CRUD được đóng gói gọn gàng với Express.js + Sequelize +
+            EJS. Tạo, xem, sửa, xóa người dùng chỉ trong một cú click. Sẵn sàng
+            bắt đầu ngay bây giờ nào !!!
+          </p>
+
+          <div class="actions">
+            <!-- Đi tới danh sách users -->
+            <a
+              class="btn btn-primary"
+              href="/get-crud"
+              title="Xem danh sách người dùng"
+            >
+              👉 Vào User Management
+            </a>
+
+            <!-- Form tạo user -->
+            <a class="btn" href="/crud" title="Tạo người dùng mới">
+              ➕ Tạo User mới
+            </a>
+
+            <!-- Demo API (nếu có route /api/ping) -->
+            <a class="btn" href="/get-crud#how-it-works" title="Tìm hiểu nhanh">
+              📘 Hướng dẫn nhanh
+            </a>
+          </div>
+
+          <div class="features">
+            <div class="chip">
+              <span class="dot"></span> Kết nối DB: <strong>&nbsp;MySQL</strong>
+            </div>
+            <div class="chip">
+              <span class="dot"></span> ORM: <strong>&nbsp;Sequelize</strong>
+            </div>
+            <div class="chip">
+              <span class="dot"></span> View engine: <strong>&nbsp;EJS</strong>
+            </div>
+          </div>
+
+          <div class="foot">
+            Mẹo: bấm <span class="kbd">G</span> rồi
+            <span class="kbd">U</span> để mở nhanh trang Users.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Keyboard shortcut: G then U -> /get-crud
+      (function () {
+        let last = 0;
+        window.addEventListener("keydown", (e) => {
+          const now = Date.now();
+          if (now - last > 1000) last = 0; // reset sequence if too slow
+          if ((e.key === "g" || e.key === "G") && !last) {
+            last = now;
+            return;
+          }
+          if ((e.key === "u" || e.key === "U") && last) {
+            window.location.href = "/get-crud";
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
